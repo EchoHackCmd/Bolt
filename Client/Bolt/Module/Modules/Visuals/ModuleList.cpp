@@ -23,7 +23,7 @@ public:
     Module* mod;
     float xOff = 0.f;
     float textLen = 0.f;
-    float animModifier = 0.4f;
+    float animModifier = 1.f;
 public:
     auto updateXOff(float resX) -> void {
         if(this->mod == nullptr)
@@ -101,7 +101,7 @@ auto ModuleList::onRender(RenderUtils* r) -> void {
 };
 
 auto ModuleList::applyAlpha(void) -> void {
-    float modifier = 0.004f;
+    float modifier = 0.05f;
 
     auto decreaseAlpha = [&]() {
         if(alpha > 0.f)

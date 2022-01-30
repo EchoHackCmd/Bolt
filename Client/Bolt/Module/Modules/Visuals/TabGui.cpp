@@ -197,7 +197,7 @@ auto TabGui::onKey(uint64_t key, bool isDown, bool* cancel) -> void {
 };
 
 auto TabGui::applyAlpha(void) -> void {
-    float modifier = 0.004f;
+    float modifier = 0.05f;
 
     auto decreaseAlpha = [&]() {
         if(alpha > 0.f)

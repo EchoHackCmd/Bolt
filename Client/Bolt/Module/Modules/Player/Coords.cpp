@@ -31,10 +31,12 @@ auto Coords::onRender(RenderUtils* r) -> void {
     r->fillRectangle(Vec4<float>(0, res.y - 12.f, textLen + 4, res.y), bgColor);
     r->drawRectangle(Vec4<float>(0, res.y - 12.f, textLen + 4, res.y), outlineColor, 1);
     r->drawString(textPos, 1, Vec2<float>(2, res.y - 11.f), textColor);
+
+    r->getCtx()->flushText(0);
 };
 
 auto Coords::applyAlpha(void) -> void {
-    float modifier = 0.004f;
+    float modifier = 0.05f;
 
     auto decreaseAlpha = [&]() {
         if(alpha > 0.f)

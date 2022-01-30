@@ -14,6 +14,7 @@ typedef void (__thiscall* UIRenderContext)(void*, MinecraftUIRenderContext*);
 UIRenderContext _UIRenderContext;
 
 RenderUtils* renderUtils = nullptr;
+auto frame = 0;
 
 auto RenderCallback(void* a1, MinecraftUIRenderContext* ctx) -> void {
     if(renderManager != nullptr) {
@@ -39,16 +40,20 @@ auto RenderCallback(void* a1, MinecraftUIRenderContext* ctx) -> void {
             };
         };
 
-        if(renderUtils != nullptr) {
-            for(auto c : renderManager->getCategories()) {
-                for(auto m : c->getModules()) {
-                    if(m->isEnabled)
-                        m->onRender(renderUtils);
+        if(frame >= 2) {
+            frame = 0;
+            if(renderUtils != nullptr) {
+                for(auto c : renderManager->getCategories()) {
+                    for(auto m : c->getModules()) {
+                        if(m->isEnabled)
+                            m->onRender(renderUtils);
+                    };
                 };
             };
         };
     };
 
+    frame++;
     _UIRenderContext(a1, ctx);
 };
 
