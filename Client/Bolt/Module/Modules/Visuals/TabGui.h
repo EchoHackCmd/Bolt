@@ -10,6 +10,7 @@ public:
 public:
     float animSpeed = 1.5f;
 public:
+
     auto moveTo(Vec2<float> dest) -> void {
         auto currX = currPos.x;
         auto currY = currPos.y;
@@ -26,7 +27,7 @@ public:
 
 public:
 
-    auto setPos(Vec2<float> dest) -> void {
+    auto setPos(Vec2<float> dest = Vec2<float>()) -> void {
         this->currPos = dest;
     };
 
