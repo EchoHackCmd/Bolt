@@ -6,7 +6,7 @@
 class Uninject : public Module {
 public:
     Uninject(Category* category) : Module(category, "Uninject") {
-        //
+        this->setKey(0x55); /* U */
     };
 public:
     auto onEnable(void) -> void override;
