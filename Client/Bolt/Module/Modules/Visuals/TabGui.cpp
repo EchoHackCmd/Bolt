@@ -76,8 +76,9 @@ auto TabGui::onRender(RenderUtils* r) -> void {
 
         auto I = 0;
         for(auto module : category->getModules()) {
-            auto currColor = module->isEnabled ? Color(30, 200, 50, this->alpha) : textColor;
+            auto currColor = module->isEnabled ? Color(0, 180, 250, this->alpha) : textColor;
             auto textPos = Vec2<float>(modsRect.x + 2.f, I * 10 + 2.f);
+            
             r->drawString(module->name, 1, textPos, currColor);
 
             if(this->selectedMod && this->indexMod == I) {
