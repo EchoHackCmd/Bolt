@@ -36,12 +36,10 @@ auto TabGui::onRender(RenderUtils* r) -> void {
 
     auto I = 0;
     for(auto category : categories) {
-        auto textPos = Vec2<float>(2.f, I * 10 + 2.f);
+        auto textPos = Vec2<float>(categoryRect.x + 1, I * 10 + 2.f);
         r->drawString(category->name, 1, textPos, textColor);
         
         if(this->selectedCat && this->indexCat == I) {
-            r->drawString(" " + this->selectedCatCursor->text, 1, this->selectedCatCursor->currPos, textColor);
-            
             auto cursorDest = Vec2<float>(categoryRect.w - 15.f, textPos.y);
             
             auto catCursor = this->selectedCatCursor;
@@ -51,13 +49,53 @@ auto TabGui::onRender(RenderUtils* r) -> void {
                 catCursor->setPos(cursorDest);
             else
                 catCursor->moveTo(cursorDest);
+            
+            r->drawString(" " + catCursor->text, 1, cursorPos, textColor);
         };
         
         I++;
     };
 
     if(this->selectedCat) {
-        //
+        auto category = categories.at(this->indexCat);
+        auto modules = category->getModules();
+
+        auto modsWidth = 0.f;
+
+        for(auto module : modules) {
+            auto curr = r->textLen(std::string(module->name + " " + this->selectedModCursor->text), 1) + 3.f;
+            if(curr > modsWidth)
+                modsWidth = curr;
+        };
+        
+        auto modsRect = Vec4<float>(categoryRect.z + 2.f, categoryRect.y, (categoryRect.z + 2.f) + modsWidth, modules.size() * 10 + 2.f);
+        auto outlineModsRect = Vec4<float>(modsRect.x - 1.f, modsRect.y - 1.f, modsRect.z + 1.f, modsRect.w + 1.f);
+        
+        r->fillRectangle(modsRect, bgColor);
+        r->drawRectangle(outlineModsRect, outlineColor, 1);
+
+        auto I = 0;
+        for(auto module : category->getModules()) {
+            auto currColor = module->isEnabled ? Color(30, 200, 50, this->alpha) : textColor;
+            auto textPos = Vec2<float>(modsRect.x + 2.f, I * 10 + 2.f);
+            r->drawString(module->name, 1, textPos, currColor);
+
+            if(this->selectedMod && this->indexMod == I) {
+                auto cursorDest = Vec2<float>(modsRect.z - 11.f, textPos.y);
+                
+                auto modCursor = this->selectedModCursor;
+                auto cursorPos = modCursor->currPos;
+
+                if(cursorPos.x <= 0 && cursorPos.y <= 0)
+                    modCursor->setPos(cursorDest);
+                else
+                    modCursor->moveTo(cursorDest);
+                
+                r->drawString(" " + modCursor->text, 1, cursorPos, currColor);
+            };
+
+            I++;
+        };
     };
 
     ctx->flushText(0);
