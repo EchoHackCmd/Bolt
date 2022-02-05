@@ -131,6 +131,7 @@ auto TabGui::onKey(uint64_t key, bool isDown, bool* cancel) -> void {
 
     if(key == VK_LEFT) {
         if(this->selectedMod) {
+            this->selectedModCursor->setPos();
             this->selectedMod = false;
             this->indexMod = 0;
         } else
