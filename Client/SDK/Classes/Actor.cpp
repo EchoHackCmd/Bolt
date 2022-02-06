@@ -445,6 +445,120 @@ auto Actor::isPlayerType(void) -> bool {
     return (this->getEntityTypeId() == EntityType::Client_Player);
 };
 
+auto Actor::isHostileType(void) -> bool {
+    auto type = this->getEntityTypeId();
+
+    switch(type) {
+        case EntityType::Zombie:
+            return true;
+        break;
+        case EntityType::Creeper:
+            return true;
+        break;
+        case EntityType::Skeleton:
+            return true;
+        break;
+        case EntityType::Spider:
+            return true;
+        break;
+        case EntityType::Zombie_Pigman:
+            return true;
+        break;
+        case EntityType::Slime:
+            return true;
+        break;
+        case EntityType::Enderman:
+            return true;
+        break;
+        case EntityType::Silverfish:
+            return true;
+        break;
+        case EntityType::Cave_Spider:
+            return true;
+        break;
+        case EntityType::Ghast:
+            return true;
+        break;
+        case EntityType::Magma_Cube:
+            return true;
+        break;
+        case EntityType::Blaze:
+            return true;
+        break;
+        case EntityType::Zombie_Villager:
+            return true;
+        break;
+        case EntityType::Witch:
+            return true;
+        break;
+        case EntityType::Stray:
+            return true;
+        break;
+        case EntityType::Husk:
+            return true;
+        break;
+        case EntityType::Wither_Skeleton:
+            return true;
+        break;
+        case EntityType::Guardian:
+            return true;
+        break;
+        case EntityType::Elder_Guardian:
+            return true;
+        break;
+        case EntityType::Wither:
+            return true;
+        break;
+        case EntityType::Ender_Dragon:
+            return true;
+        break;
+        case EntityType::Shulker:
+            return true;
+        break;
+        case EntityType::Endermite:
+            return true;
+        break;
+        case EntityType::Vindicator:
+            return true;
+        break;
+        case EntityType::Phantom:
+            return true;
+        break;
+        case EntityType::Ravager:
+            return true;
+        break;
+        case EntityType::Evocation_Villager:
+            return true;
+        break;
+        case EntityType::Vex:
+            return true;
+        break;
+        case EntityType::Drowned:
+            return true;
+        break;
+        case EntityType::Pillager:
+            return true;
+        break;
+        case EntityType::Zombie_Villager_V2:
+            return true;
+        break;
+        case EntityType::Piglin:
+            return true;
+        break;
+        case EntityType::Hoglin:
+            return true;
+        break;
+        case EntityType::Zoglin:
+            return true;
+        break;
+        case EntityType::Piglin_Brute:
+            return true;
+        break;
+    };
+
+    return false;
+};
+
 auto Actor::isNotMob(void) -> bool {
     auto type = this->getEntityTypeId();
 
