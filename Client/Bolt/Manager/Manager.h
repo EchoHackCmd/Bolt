@@ -23,7 +23,6 @@ private:
     std::map<__int64, Actor*> entityMap = std::map<__int64, Actor*>();
 private:
     std::vector<std::string> notifications;
-    std::chrono::system_clock::time_point lastNotif;
 public:
     std::string cmdPrefix = std::string("*");
 public:
