@@ -1,6 +1,9 @@
 #ifndef CLIENT_UTILS_UTILS
 #define CLIENT_UTILS_UTILS
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 #include <Windows.h>
 #include <filesystem>
 #include <functional>
@@ -9,10 +12,8 @@
 #include <string>
 #include <random>
 #include <chrono>
+#include <thread>
 #include <map>
-#include <nlohmann/json.hpp>
-
-using json = nlohmann::json;
 
 #define PI 3.141592653589793
 
