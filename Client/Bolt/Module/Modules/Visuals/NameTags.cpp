@@ -51,7 +51,7 @@ auto NameTags::onRender(RenderUtils* r) -> void {
         
         auto alpha = (mcGame->canUseKeys() ? 1.f : 0.f);
         
-        auto outlineColor = (isPlayer ? Color(52, 159, 235, alpha) : Color(52, 235, 152, alpha));
+        auto outlineColor = (isPlayer ? Color(52, 159, 235, alpha) : entity->isHostileType() ? Color(191, 47, 42, alpha) : Color(42, 191, 82, alpha));
         auto textColor = Color(30, 200, 200, alpha);
         auto bgColor = Color(25, 25, 25, (alpha > 0.f ? alpha - 0.6f : alpha));
         
