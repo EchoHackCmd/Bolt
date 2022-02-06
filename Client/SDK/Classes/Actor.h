@@ -195,6 +195,7 @@ public:
     auto getFirstPassenger(void) -> Actor*;
 public:
     auto isPlayerType(void) -> bool;
+    auto isHostileType(void) -> bool;
     auto isNotMob(void) -> bool;
     auto getEntityType(void) -> std::string;
 public:
