@@ -43,6 +43,9 @@ auto RenderCallback(void* a1, MinecraftUIRenderContext* ctx) -> void {
         if(frame >= 2) {
             frame = 0;
             if(renderUtils != nullptr) {
+                
+                renderManager->tickNotifications(renderUtils);
+
                 for(auto c : renderManager->getCategories()) {
                     for(auto m : c->getModules()) {
                         if(m->isEnabled)

@@ -9,6 +9,8 @@ class Category;
 class Module;
 class Command;
 
+class RenderUtils;
+
 class Actor;
 class GameMode;
 
@@ -19,6 +21,9 @@ private:
     std::vector<Command*> commands = std::vector<Command*>();
     std::map<uint64_t, bool> keyMap = std::map<uint64_t, bool>();
     std::map<__int64, Actor*> entityMap = std::map<__int64, Actor*>();
+private:
+    std::vector<std::string> notifications;
+    std::chrono::system_clock::time_point lastNotif;
 public:
     std::string cmdPrefix = std::string("*");
 public:
@@ -62,6 +67,9 @@ public:
 
     auto handleCommand(std::string) -> void;
     auto addCommand(Command*) -> void;
+public:
+    auto addNotif(std::string) -> void;
+    auto tickNotifications(RenderUtils*) -> void;
 };
 
 #endif /* CLIENT_BOLT_MANAGER_MANAGER */

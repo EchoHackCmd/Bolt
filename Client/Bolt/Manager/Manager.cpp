@@ -331,3 +331,43 @@ auto Manager::addCommand(Command* command) -> void {
         return Utils::debugLogF(std::string("Command '" + command->name + "' has already been registered to the Manager\n").c_str());
     this->commands.push_back(command);
 };
+
+auto Manager::addNotif(std::string notification) -> void {
+    this->notifications.push_back(notification);
+};
+
+auto Manager::tickNotifications(RenderUtils* r) -> void {
+    if(r == nullptr || !r->canDraw() || this->notifications.empty())
+        return;
+    
+    auto ctx = r->getCtx();
+    auto instance = (ctx != nullptr ? ctx->clientInstance : nullptr);
+    auto guiData = (instance != nullptr ? instance->getGuiData() : nullptr);
+    
+    if(guiData == nullptr)
+        return;
+        
+    auto text = this->notifications.front();
+    auto width = r->textLen(text, 1);
+    auto res = guiData->scaledRes;
+
+    auto textPos = Vec2<float>(5.f, res.y - 40.f);
+    
+    auto rectPos = Vec4<float>(textPos.x - 1.f, textPos.y - 1.f, textPos.x + (width + 1.f), textPos.y + 11.f);
+    auto outlinePos = Vec4<float>(rectPos.x - 1.f, rectPos.y - 1.f, rectPos.z + 1.f, rectPos.w + 1.f);
+    
+    r->drawString(text, 1, textPos, Color(30, 200, 200));
+    
+    r->fillRectangle(rectPos, Color(23, 23, 23));
+    r->drawRectangle(outlinePos, Color(52, 159, 235), 1);
+    
+    ctx->flushText(0);
+
+    auto now = std::chrono::system_clock::now();
+    
+    if(now <= this->lastNotif)
+        return;
+    
+    this->lastNotif = now + std::chrono::seconds(2);
+    this->notifications.erase(this->notifications.begin());
+};

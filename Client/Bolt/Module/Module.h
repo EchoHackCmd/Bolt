@@ -31,6 +31,7 @@ public:
     auto setLogState(bool) -> void;
 
     auto displayToChat(std::string message, bool raw = false) -> bool;
+    auto addNotification(std::string) -> void;
     
     virtual auto _onTick(void) -> void {};
     virtual auto onTick(void) -> void {};

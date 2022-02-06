@@ -43,6 +43,7 @@ auto Module::baseTick(void) -> void {
             this->onDisable();
         };
         this->getManager()->saveModuleConfigData(this);
+        this->addNotification(std::string((this->isEnabled ? "Enabled" : "Disabled")) + " " + this->name);
     };
 
     this->_onTick();
@@ -81,4 +82,11 @@ auto Module::displayToChat(std::string message, bool raw) -> bool {
         player->displayClientMessage(std::string(raw ? message : "§3" + client->name + "§f: " + message));
     
     return true;
+};
+
+auto Module::addNotification(std::string notification) -> void {
+    auto manager = this->getManager();
+
+    if(manager != nullptr)
+        manager->addNotif(notification);
 };
