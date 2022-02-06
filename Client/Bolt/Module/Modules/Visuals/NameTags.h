@@ -8,6 +8,7 @@ public:
     NameTags(Category* category) : Module(category, "Nametags") {
         this->setState(true);
     };
+public:
     auto onRender(RenderUtils*) -> void override;
 };
 
