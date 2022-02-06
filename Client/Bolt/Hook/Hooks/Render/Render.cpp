@@ -16,6 +16,8 @@ UIRenderContext _UIRenderContext;
 RenderUtils* renderUtils = nullptr;
 auto frame = 0;
 
+std::chrono::high_resolution_clock::time_point prevNotif;
+
 auto RenderCallback(void* a1, MinecraftUIRenderContext* ctx) -> void {
     if(renderManager != nullptr) {
         if(!renderManager->getEntityMap().empty()) {
@@ -44,7 +46,13 @@ auto RenderCallback(void* a1, MinecraftUIRenderContext* ctx) -> void {
             frame = 0;
             if(renderUtils != nullptr) {
                 
-                renderManager->tickNotifications(renderUtils);
+                renderManager->tickFirstNotification(renderUtils);
+
+                auto now = std::chrono::high_resolution_clock::now();
+                if(now > prevNotif) {
+                    renderManager->rmFirstNotification();
+                    prevNotif = now + std::chrono::seconds(1);
+                };
 
                 for(auto c : renderManager->getCategories()) {
                     for(auto m : c->getModules()) {

@@ -69,7 +69,8 @@ public:
     auto addCommand(Command*) -> void;
 public:
     auto addNotif(std::string) -> void;
-    auto tickNotifications(RenderUtils*) -> void;
+    auto rmFirstNotification(void) -> void;
+    auto tickFirstNotification(RenderUtils*) -> void;
 };
 
 #endif /* CLIENT_BOLT_MANAGER_MANAGER */

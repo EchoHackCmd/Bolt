@@ -336,7 +336,12 @@ auto Manager::addNotif(std::string notification) -> void {
     this->notifications.push_back(notification);
 };
 
-auto Manager::tickNotifications(RenderUtils* r) -> void {
+auto Manager::rmFirstNotification(void) -> void {
+    if(!this->notifications.empty())
+        this->notifications.erase(this->notifications.begin());
+};
+
+auto Manager::tickFirstNotification(RenderUtils* r) -> void {
     if(r == nullptr || !r->canDraw() || this->notifications.empty())
         return;
     
@@ -362,12 +367,4 @@ auto Manager::tickNotifications(RenderUtils* r) -> void {
     r->drawRectangle(outlinePos, Color(52, 159, 235), 1);
     
     ctx->flushText(0);
-
-    auto now = std::chrono::system_clock::now();
-    
-    if(now <= this->lastNotif)
-        return;
-    
-    this->lastNotif = now + std::chrono::seconds(2);
-    this->notifications.erase(this->notifications.begin());
 };
