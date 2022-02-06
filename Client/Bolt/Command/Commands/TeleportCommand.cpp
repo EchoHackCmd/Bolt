@@ -21,7 +21,14 @@ auto TeleportCommand::onCommand(std::string message, std::vector<std::string> ar
         };
         
         player->setPos(Vec3<float>(std::stof(args.at(1)), std::stof(args.at(2)), std::stof(args.at(3))));
-        this->reply(std::string("Teleported, X: " + args.at(1) + ", Y: " + args.at(2) + ", Z: " + args.at(3)));
+
+        auto manager = this->getManager();
+        auto msg = std::string("Teleported, X: " + args.at(1) + ", Y: " + args.at(2) + ", Z: " + args.at(3));
+        
+        if(manager != nullptr)
+            manager->addNotif(msg);
+        else
+            this->reply(msg);
 
     } catch(std::exception e) {
         this->reply(std::string("Invalid usage, example: " + this->getManager()->cmdPrefix + this->name + " 75 255 120"));
