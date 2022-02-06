@@ -3,4 +3,5 @@ target_sources(Bolt PRIVATE
         "ClickGui.cpp"
             "ModuleList.cpp"
                 "NameTags.cpp"
+                    "ItemDrops.cpp"
 )
