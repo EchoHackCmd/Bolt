@@ -103,6 +103,7 @@ auto Manager::initCommands(void) -> void {
 #include "../Module/Modules/Visuals/ClickGui.h"
 #include "../Module/Modules/Visuals/ModuleList.h"
 #include "../Module/Modules/Visuals/NameTags.h"
+#include "../Module/Modules/Visuals/ItemDrops.h"
 
 /* World */
 
@@ -154,6 +155,7 @@ auto Manager::initModules(void) -> void {
     new ClickGui(this->getCategory("Visuals"));
     new ModuleList(this->getCategory("Visuals"));
     new NameTags(this->getCategory("Visuals"));
+    new ItemDrops(this->getCategory("Visuals"));
 
     /* World */
 
